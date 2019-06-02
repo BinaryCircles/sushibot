@@ -1,11 +1,11 @@
 {
-  "helpList": [
+  "helpJson": [
   {
-    "name": "%help",
-    "description": "shows a list of the commands and what they do"
+    "name": "_help",
+    "description": "displays a list of commands and their uses"
   },
   {
-    "name": "%ping",
-    "description": "pings the bot"
+    "name": "_ping",
+    "description": "pings the robot for a response"
   }
 ]}

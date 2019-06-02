@@ -1,4 +1,4 @@
-```{% for command in helpList %}
+```{% for command in helpJson %}
 {{ command.name }} - {{ command.description }}
 {% if command.syntax|length !== 0 %}"{{ command.syntax }}"
 {% endif %}

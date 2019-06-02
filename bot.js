@@ -5,7 +5,6 @@
 const Discord = require('discord.js')
 const bot = new Discord.Client()
 const fs = require('fs')
-const nunjucks = require('nunjucks')
 
 // global variables
 
@@ -27,9 +26,12 @@ bot.on('message', msg => {
 
   // check for % at beginning of message
   if (msg.content.startsWith("%")) {
-
-    return
-
+    let command = msg.content.split("%")[1]
+    if (plugins.includes(command)) {
+      module.exports = { client: bot, msg: msg }
+      delete require.cache[require.resolve(`./plugins/${command}.js`)]
+      require(`./plugins/${command}.js`)
+    }
   }
 
 })
