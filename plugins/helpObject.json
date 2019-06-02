@@ -1,0 +1,11 @@
+{
+  "helpList": [
+  {
+    "name": "%help",
+    "description": "shows a list of the commands and what they do"
+  },
+  {
+    "name": "%ping",
+    "description": "pings the bot"
+  }
+]}

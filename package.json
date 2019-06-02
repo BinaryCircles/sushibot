@@ -1,0 +1,13 @@
+{
+  "name": "sushibot",
+  "version": "0.1.0",
+  "description": "sushi squad 7461 team bot",
+  "repository": "https://github.com/BinaryCircles/sushibot",
+  "author": "Aryan Jha <aryan@jha.io>",
+  "dependencies": {
+    "discord.js": "discordjs/discord.js",
+    "json-beautify": "*",
+    "nunjucks": "*"
+  },
+  "main": "bot.js"
+}
