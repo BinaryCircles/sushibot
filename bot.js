@@ -36,6 +36,15 @@ bot.on('message', msg => {
 
 })
 
+// primary reaction listener
+bot.on('messageReactionAdd', (messageReaction, user) => {
+
+  module.exports = { client: bot, reaction: messageReaction, user: user }
+  delete require.cache[require.resolve(`./plugins/reactionHandler.js`)]
+  require(`./plugins/reactionHandler.js`)
+
+})
+
 // global functions
 
 // load configuration
