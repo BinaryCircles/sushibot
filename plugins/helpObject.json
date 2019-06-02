@@ -1,11 +1,15 @@
 {
   "helpJson": [
   {
-    "name": "_help",
+    "name": "%help",
     "description": "displays a list of commands and their uses"
   },
   {
-    "name": "_ping",
+    "name": "%ping",
     "description": "pings the robot for a response"
+  },
+  {
+    "name": "%roles",
+    "description": "allows you to add or remove subteam roles"
   }
 ]}
