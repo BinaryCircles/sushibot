@@ -11,3 +11,9 @@ if (reaction.emoji.identifier == config.hofEmoji) {
   delete require.cache[require.resolve(`./hof.js`)]
   require(`./hof.js`)
 }
+
+if (reaction.emoji.name == '✅' && reaction.count != 1) {
+  module.exports = { reaction: reaction, user: user }
+  delete require.cache[require.resolve(`./rolesReacts.js`)]
+  require(`./rolesReacts.js`)
+}
