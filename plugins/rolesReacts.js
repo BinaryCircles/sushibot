@@ -40,7 +40,16 @@ if (roleAssigners.includes(reactionHandler.reaction.message.id)) {
 
   roleAssigners.splice(roleAssigners.indexOf(reactionHandler.reaction.message.id), 1)
   fs.writeFileSync("./plugins/roleassigners.txt", JSON.stringify(roleAssigners))
-  reactionHandler.reaction.message.channel.send(`<@${reactionHandler.reaction.message.mentions.members.first().id}> added ${addedRoles} and removed ${removedRoles}`)
+
+  if (addedRoles.length != 0 && removedRoles.length != 0) {
+    reactionHandler.reaction.message.channel.send(`<@${currentMember.id}> added ${addedRoles} and removed ${removedRoles}`)
+  } else if (addedRoles.length != 0 && removedRoles.length == 0) {
+    reactionHandler.reaction.message.channel.send(`<@${currentMember.id}> added ${addedRoles}`)
+  } else if (addedRoles.length == 0 && removedRoles.length != 0) {
+    reactionHandler.reaction.message.channel.send(`<@${currentMember.id}> removed ${removedRoles}`)
+  } else if (addedRoles.length == 0 && removedRoles.length == 0) {
+    reactionHandler.reaction.message.channel.send(`the coward <@${currentMember.id}> does nothing`)
+  }
 
 }
 
