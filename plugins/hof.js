@@ -6,11 +6,14 @@ let hofList = []
 
 if (reactionHandler.reaction.count >= config.hofCount) {
 
-  let userID = reactionHandler.reaction.message.member.id
-  let userAvatar = reactionHandler.reaction.message.author.avatarURL()
-  let messageChannel = reactionHandler.reaction.message.channel.id
-  let hofMessage = reactionHandler.reaction.message.content
-  let messageID = reactionHandler.reaction.message.id
+  let hofMessageObject = reactionHandler.reaction.message
+  let userID = hofMessageObject.member.id
+  let userAvatar = hofMessageObject.author.avatarURL()
+  let messageChannel = hofMessageObject.channel.id
+  let hofMessage = hofMessageObject.content
+  let attachment = hofMessageObject.attachments.first()
+  let messageID = hofMessageObject.id
+  let messageLink = hofMessageObject.url
 
   if (fs.existsSync("./plugins/hof.txt")) {
     hofList = JSON.parse(fs.readFileSync("./plugins/hof.txt", 'utf8'))
@@ -21,40 +24,115 @@ if (reactionHandler.reaction.count >= config.hofCount) {
   if (hofList.includes(messageID)) {
     return
   } else {
-    bot.client.guilds.get(config.currentGuild).channels.get(config.hofChannel).send(
-      {
-        embed: {
-          author: {
-            name: "Hall of Fame",
-          },
-          thumbnail: { url: userAvatar },
-          color: 0xffbaf9,
-          fields: [
-            {
-              name: "User",
-              value: `<@${userID}>`,
-              inline: true
+    if (attachment == undefined) {
+      bot.client.guilds.get(config.currentGuild).channels.get(config.hofChannel).send(
+        {
+          embed: {
+            author: {
+              name: "Hall of Fame",
+              url: messageLink,
+              iconURL: userAvatar,
+              proxyIconURL: userAvatar
             },
-            {
-              name: "Channel",
-              value: `<#${messageChannel}>`,
-              inline: true
-            },
-            {
-              name: "Message",
-              value: hofMessage,
-              inline: true
-            },
-            {
-              name: "ID",
-              value: messageID,
-              inline: true
-            }
-          ],
-          footer: { text: 'BinaryCircles/sushibot' }
+            color: 0xffbaf9,
+            fields: [
+              {
+                name: "User",
+                value: `<@${userID}>`,
+                inline: true
+              },
+              {
+                name: "Channel",
+                value: `<#${messageChannel}>`,
+                inline: true
+              },
+              {
+                name: "ID",
+                value: messageID,
+                inline: true
+              },
+              {
+                name: "Message",
+                value: hofMessage,
+                inline: false
+              }
+            ],
+            footer: { text: 'BinaryCircles/sushibot' }
+          }
         }
-      }
-    )
+      )
+    } else if (attachment.height != null && hofMessage.length == 0) {
+      bot.client.guilds.get(config.currentGuild).channels.get(config.hofChannel).send(
+        {
+          embed: {
+            author: {
+              name: "Hall of Fame",
+              url: messageLink,
+              iconURL: userAvatar,
+              proxyIconURL: userAvatar
+            },
+            image: { url: attachment.url },
+            color: 0xffbaf9,
+            fields: [
+              {
+                name: "User",
+                value: `<@${userID}>`,
+                inline: true
+              },
+              {
+                name: "Channel",
+                value: `<#${messageChannel}>`,
+                inline: true
+              },
+              {
+                name: "ID",
+                value: messageID,
+                inline: true
+              }
+            ],
+            footer: { text: 'BinaryCircles/sushibot' }
+          }
+        }
+      )
+    } else if (attachment.height != null && hofMessage.length > 0) {
+      bot.client.guilds.get(config.currentGuild).channels.get(config.hofChannel).send(
+        {
+          embed: {
+            author: {
+              name: "Hall of Fame",
+              url: messageLink,
+              iconURL: userAvatar,
+              proxyIconURL: userAvatar
+            },
+            image: { url: attachment.url} ,
+            color: 0xffbaf9,
+            fields: [
+              {
+                name: "User",
+                value: `<@${userID}>`,
+                inline: true
+              },
+              {
+                name: "Channel",
+                value: `<#${messageChannel}>`,
+                inline: true
+              },
+              {
+                name: "ID",
+                value: messageID,
+                inline: true
+              },
+              {
+                name: "Message",
+                value: hofMessage,
+                inline: false
+              }
+            ],
+            footer: { text: 'BinaryCircles/sushibot' }
+          }
+        }
+      )
+    }
 
     hofList.push(messageID)
     fs.writeFileSync("./plugins/hof.txt", JSON.stringify(hofList), 'utf8')
