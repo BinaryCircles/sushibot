@@ -26,7 +26,7 @@ if (roleAssigners.includes(reactionHandler.reaction.message.id)) {
   let removedRoles = []
 
   for (let i = 0; i < Object.keys(teamReacts).length; i++) {
-    if (reactionHandler.reaction.message.reactions.get(Object.keys(teamReacts)[i]).count > 1) {
+    if (reactionHandler.reaction.message.reactions.get(Object.keys(teamReacts)[i]).users.filter(user => user.id.includes(currentMember.id)).first() != undefined) {
       let currentReact = Object.keys(teamReacts)[i]
       if (currentMember.roles.filter(role => role.id.includes(teamReacts[currentReact])).first() != undefined) {
         currentMember.roles.remove(currentMember.roles.filter(role => role.id.includes(teamReacts[currentReact])).first())
