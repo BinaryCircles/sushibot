@@ -8,7 +8,7 @@ if (fs.existsSync("./plugins/roleassigners.txt")) {
   fs.writeFileSync("./plugins/roleassigners.txt", JSON.stringify(roleAssigners))
 }
 
-bot.msg.reply("react with roles you would like to add/remove\n(🛠 mech, 📝 design, 🔌 electrical, 💻 programming, 💰 business, 🎨 imagery/media)\nhit ✅ when you're done")
+bot.msg.reply("react with roles you would like to add/remove\n(🛠 mech, 📝 design, 🔌 electrical, 💻 programming, 💰 business, 🎨 imagery/media, 🐴 rhs, 🔵 stem)\nhit ✅ when you're done")
   .then(roleMessage => {
     roleMessage.react('🛠')
     roleMessage.react('📝')
@@ -16,6 +16,8 @@ bot.msg.reply("react with roles you would like to add/remove\n(🛠 mech, 📝 d
     roleMessage.react('💻')
     roleMessage.react('💰')
     roleMessage.react('🎨')
+    roleMessage.react('🐴')
+    roleMessage.react('🔵')
     roleMessage.react('✅')
     roleAssigners.push(roleMessage.id)
     fs.writeFileSync("./plugins/roleassigners.txt", JSON.stringify(roleAssigners))
