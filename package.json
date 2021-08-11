@@ -5,7 +5,7 @@
   "repository": "https://github.com/BinaryCircles/sushibot",
   "author": "Aryan Jha <aryan@jha.io>",
   "dependencies": {
-    "discord.js": "github:discordjs/discord.js",
+    "discord.js": "<13.0.0",
     "json-beautify": "*",
     "nunjucks": "^3.2.3"
   },
