@@ -7,7 +7,7 @@
   "dependencies": {
     "discord.js": "github:discordjs/discord.js",
     "json-beautify": "*",
-    "nunjucks": "^3.2.0"
+    "nunjucks": "^3.2.3"
   },
   "main": "bot.js"
 }
